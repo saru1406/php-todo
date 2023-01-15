@@ -25,6 +25,23 @@
         </div>
         <div class="col-xl-5 offset-xl-1 mt-5">
             <h2 class="text-center">予定詳細</h2>
+            <!-- <div class="card border-warning mb-4 text-center shadow" style="max-width: 100%;">
+                <div class="card-header">タイトル:{{ $memo->title }}</div>
+                <div class="card-body">
+                    <p class="card-text">{{ $memo->body }}</p>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-xl-6">
+                    <a href="{{ $memo['id'] }}/edit", class="btn btn-primary text-nowrap">編集</a>
+                </div>
+                <div class="col-xl-6">
+                    <form method='POST' action="/memos/{{ $memo->id }}">
+                        @csrf
+                        @method('DELETE')
+                            <button type="submit" class="btn btn-danger text-nowrap">削除</button>
+                    </form>
+                </div> -->
             <table class="table table-hover table-inverse">
                 <tr>
                     <th>タイトル</th>
@@ -33,10 +50,15 @@
                     <th></th>
                 </tr>
                     <tr>
-                        <td>{{ $memo->title }}</td>
+                        <td class="text-nowrap">{{ $memo->title }}</td>
                         <td>{{ $memo->body }}</td>
-                        <td><a href="{{ $memo['id'] }}/edit", class="btn btn-primary">編集</a>
-                        <td><a href="", class="btn btn-danger">削除</a>
+                        <td><a href="{{ $memo['id'] }}/edit", class="btn btn-primary text-nowrap">編集</a></td>
+                        <td><form method='POST' action="/memos/{{ $memo->id }}">
+                            @csrf
+                            @method('DELETE')
+                                <button type="submit" class="btn btn-danger text-nowrap">削除</button>
+                            </form>
+                        </td>
                     </tr>
             </table>
         </div>

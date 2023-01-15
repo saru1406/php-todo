@@ -16,7 +16,7 @@ class MemoController extends Controller
     {
         $user = \Auth::user();
         // 自分の投稿した予定のみ表示
-        $memos = Memo::where('user_id', $user['id'])->get();
+        $memos = Memo::where('user_id', $user->id)->get();
         
         return view('memos.index', compact('user','memos'));
     }
@@ -58,7 +58,8 @@ class MemoController extends Controller
     public function show($id)
     {
         $user = \Auth::user();
-        $memo = Memo::find($id);
+        // 自分の投稿した予定のみに制限
+        $memo = Memo::where('user_id', $user->id)->find($id);
 
         return view('memos.show', compact('user','memo'));
     }
@@ -72,7 +73,8 @@ class MemoController extends Controller
     public function edit($id)
     {
         $user = \Auth::user();
-        $memo = Memo::where('id', $id)->where('user_id', $user['id'])->first();
+        // 自分の投稿した予定のみに制限
+        $memo = Memo::where('user_id', $user->id)->find($id);
 
         return view('memos.edit', compact('user', 'memo'));
     }
@@ -105,6 +107,10 @@ class MemoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = \Auth::user();
+        // 自分の投稿した予定のみに制限
+        $memo = Memo::where('user_id', $user->id)->find($id)->delete();
+
+        return redirect()->route('memos.index');
     }
 }

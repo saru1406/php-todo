@@ -9,9 +9,9 @@
             @method('PATCH')
                 <input type='hidden' name='user_id' value="{{ $user['id'] }}">
                     <h4>タイトル</h4>
-                        <textarea name='title' class="form-control bg-white my-3">{{ $memo['title']}}</textarea>
+                        <textarea name='title' class="form-control bg-white my-3" rows="1">{{ $memo['title']}}</textarea>
                     <h4>内容</h4>
-                        <textarea name='body' class="form-control bg-white my-3">{{ $memo['body']}}</textarea>
+                        <textarea name='body' class="form-control bg-white my-3" rows="5">{{ $memo['body']}}</textarea>
                     <button type="submit" class="btn btn-success">変更する</button>
                 </input>
         </form>
