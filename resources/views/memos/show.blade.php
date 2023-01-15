@@ -12,7 +12,7 @@
                 </tr>
             </table>
             <h2 class="my-5 text-center text-nowrap">予定を入力してください</h2>
-            <form method='POST' action="memos">
+            <form method='POST' action="{{ route('memos.store')}}">
                 @csrf
                 <input type='hidden' name='user_id' value="{{ $user['id'] }}">
                     <h4>タイトル</h4>
@@ -24,18 +24,20 @@
             </form>
         </div>
         <div class="col-xl-5 offset-xl-1 mt-5">
-            <h2 class="text-center">予定一覧</h2>
+            <h2 class="text-center">予定詳細</h2>
             <table class="table table-hover table-inverse">
                 <tr>
                     <th>タイトル</th>
                     <th>内容</th>
+                    <th></th>
+                    <th></th>
                 </tr>
-                    @foreach ($memos as $memo)
-                        <tr>
-                            <td><a href="memos/{{ $memo['id'] }}" style="text-decoration:none;" class="text-nowrap">{{ $memo->title }}</a></td>
-                            <td>{{ $memo->body }}</td>
-                        </tr>
-                    @endforeach
+                    <tr>
+                        <td>{{ $memo->title }}</td>
+                        <td>{{ $memo->body }}</td>
+                        <td><a href="{{ $memo['id'] }}/edit", class="btn btn-primary">編集</a>
+                        <td><a href="", class="btn btn-danger">削除</a>
+                    </tr>
             </table>
         </div>
     </div>

@@ -15,8 +15,9 @@ class MemoController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        // 自分の投稿したメモのみ表示
+        // 自分の投稿した予定のみ表示
         $memos = Memo::where('user_id', $user['id'])->get();
+        
         return view('memos.index', compact('user','memos'));
     }
 
@@ -43,7 +44,6 @@ class MemoController extends Controller
         $memo->title=$request->input('title');
         $memo->body=$request->input('body');
         $memo->user_id=$request->input('user_id');
-
         $memo->save();
 
         return redirect()->route('memos.index');
@@ -57,7 +57,10 @@ class MemoController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = \Auth::user();
+        $memo = Memo::find($id);
+
+        return view('memos.show', compact('user','memo'));
     }
 
     /**
@@ -83,14 +86,15 @@ class MemoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $user = \Auth::user();
         $memo = Memo::find($id);
 
         $memo->title=$request->input('title');
         $memo->body=$request->input('body');
-        
         $memo->save();
 
-        return redirect()->route('memos.index');
+        return view('memos.show', compact('user','memo'));
+        return redirect()->route('memos.show');
     }
 
     /**
