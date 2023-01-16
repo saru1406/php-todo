@@ -59,6 +59,7 @@
                         </tr>
                     @endforeach
             </table>
+            {!! $memos->appends(request()->query())->links() !!}
         </div>
     </div>
 </div>

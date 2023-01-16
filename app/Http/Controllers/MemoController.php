@@ -25,7 +25,8 @@ class MemoController extends Controller
                 ->orWhere('body', 'LIKE', "%{$keyword}%");
         }
         // 自分の投稿した予定のみ表示
-        $memos = $query->where('user_id', $user->id)->get();
+        $memos = $query->where('user_id', $user->id)->paginate(10);
+        
 
         return view('memos.index', compact('user','memos','keyword'));
     }
