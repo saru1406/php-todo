@@ -12,13 +12,22 @@ class MemoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $user = \Auth::user();
+
+        // 検索機能
+        $keyword = $request->input('keyword');
+        // 自分の投稿した予定のみ検索表示
+        $query = Memo::query()->where('user_id', $user->id);
+        if(!empty($keyword)) {
+            $query->where('title', 'LIKE', "%{$keyword}%")
+                ->orWhere('body', 'LIKE', "%{$keyword}%");
+        }
         // 自分の投稿した予定のみ表示
-        $memos = Memo::where('user_id', $user->id)->get();
-        
-        return view('memos.index', compact('user','memos'));
+        $memos = $query->where('user_id', $user->id)->get();
+
+        return view('memos.index', compact('user','memos','keyword'));
     }
 
     /**

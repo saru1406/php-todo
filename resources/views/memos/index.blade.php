@@ -26,8 +26,18 @@
                 </input>
             </form>
         </div>
-        <div class="col-xl-5 offset-xl-1 mt-5">
-            <h2 class="text-center">予定一覧</h2>
+        <div class="col-xl-5 offset-xl-1">
+            <form action="{{ route('memos.index') }}" method="GET">
+                <div class="row">
+                    <div class="col-xl-8">
+                        <input type="text" class="form-control mx-auto bg-white" name="keyword" value="{{ $keyword }}">
+                    </div>
+                    <div class="col-xl-4 d-flex align-items-center">
+                        <input type="submit" value="検索">
+                    </div>
+                </div>
+            </form>
+            <h2 class="text-center mt-5">予定一覧</h2>
             <!-- @foreach ($memos as $memo)
             <a href="memos/{{ $memo['id'] }}" style="text-decoration:none;" class="text-dark">
                 <div class="card border-warning mb-4 text-center shadow" style="max-width: 100%;">
