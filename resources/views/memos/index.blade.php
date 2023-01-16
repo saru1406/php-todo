@@ -22,7 +22,7 @@
                         <textarea name='title' class="form-control bg-white my-3" rows="1"></textarea>
                     <h4>内容</h4>
                         <textarea name='body' class="form-control bg-white my-3" rows="5"></textarea>
-                    <button type="submit" class="btn btn-success">追加する</button>
+                    <button type="submit" class="btn btn-success mb-3">追加する</button>
                 </input>
             </form>
         </div>

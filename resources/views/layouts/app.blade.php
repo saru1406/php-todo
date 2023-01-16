@@ -77,6 +77,7 @@
 
         <main class="py-4">
             @yield('content')
+            <div class="m-4"></div>
         </main>
         <footer class="border-top p-1 bg-dark fixed-bottom">
             <p class="my-2 mx-auto text-center text-white">- Todoアプリ -</p>

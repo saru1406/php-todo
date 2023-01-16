@@ -3,7 +3,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-        <div class="col-xl-3 offset-xl-1 mt-5">
+        <div class="col-xl-3 d-none d-xl-block offset-xl-1 mt-5">
             <h2>User info</h2>
             <table class="table mt-3">
                 <tr>
