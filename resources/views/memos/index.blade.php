@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid py-4">
     <div class="row">
         <div class="col-xl-3 offset-xl-1 mt-5">
             <h2>User info</h2>
@@ -18,12 +18,11 @@
             <form method='POST' action="memos">
                 @csrf
                 <input type='hidden' name='user_id' value="{{ $user['id'] }}">
-                    <h4>タイトル</h4>
-                        <textarea name='title' class="form-control bg-white my-3" rows="1"></textarea>
-                    <h4>内容</h4>
-                        <textarea name='body' class="form-control bg-white my-3" rows="5"></textarea>
-                    <button type="submit" class="btn btn-success mb-3">追加する</button>
-                </input>
+                <h4>タイトル</h4>
+                    <textarea name='title' class="form-control bg-white my-3" rows="1"></textarea>
+                <h4>内容</h4>
+                    <textarea name='body' class="form-control bg-white my-3" rows="5"></textarea>
+                <button type="submit" class="btn btn-success mb-3">追加する</button>
             </form>
         </div>
         <div class="col-xl-5 offset-xl-1">

@@ -1,0 +1,6 @@
+.main-visual{
+    height: 400px;
+    background-image: url(../img/image.jpg);
+    background-size: cover;
+    background-position: center;
+}

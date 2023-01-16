@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid py-4">
     <div class="col-xl-5 mx-auto mt-5">
         <h2 class="my-5 text-center text-nowrap">予定を編集</h2>
         <form method='POST' action="/memos/{{ $memo->id }}">

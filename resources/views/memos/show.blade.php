@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid py-4">
     <div class="row">
         <div class="col-xl-3 d-none d-xl-block offset-xl-1 mt-5">
             <h2>User info</h2>
