@@ -10,12 +10,15 @@ class UserController extends Controller
     public function edit()
     {
         $user = \Auth::user();
-        return view('mypage', compact('user'));
+        return view('users.edit', compact('user'));
     }
 
     public function update(Request $request)
     {
         $user = \Auth::user();
-        dd($user);
+        $user->name = $request->input('name');
+        $user->save();
+        
+        return redirect()->route('memos.index');
     }
 }

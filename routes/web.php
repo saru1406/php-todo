@@ -22,5 +22,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('memos',MemoController::class);
-Route::get('/mypage', 'UserController@edit')->name('maypage');
-Route::put('/mypage', 'UserController@update')->name('mypage_update');
+Route::get('/mypage', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
+Route::patch('/mypage', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');

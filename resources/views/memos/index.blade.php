@@ -11,6 +11,9 @@
                     <td><h5>{{$user['name']}}</h5></td>
                 </tr>
             </table>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <a class="btn btn-outline-secondary btn", href="{{ route('user.edit')}}">ユーザー情報編集</a>
+            </div>
             <h2 class="my-5 text-center text-nowrap">予定を入力してください</h2>
             <form method='POST' action="memos">
                 @csrf

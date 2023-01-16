@@ -41,9 +41,9 @@ class MemoController extends Controller
     {
         $memo=new Memo;
 
-        $memo->title=$request->input('title');
-        $memo->body=$request->input('body');
-        $memo->user_id=$request->input('user_id');
+        $memo->title = $request->input('title');
+        $memo->body = $request->input('body');
+        $memo->user_id = $request->input('user_id');
         $memo->save();
 
         return redirect()->route('memos.index');
@@ -91,8 +91,8 @@ class MemoController extends Controller
         $user = \Auth::user();
         $memo = Memo::find($id);
 
-        $memo->title=$request->input('title');
-        $memo->body=$request->input('body');
+        $memo->title = $request->input('title');
+        $memo->body = $request->input('body');
         $memo->save();
 
         return view('memos.show', compact('user','memo'));
