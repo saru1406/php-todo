@@ -3,6 +3,16 @@
 @section('content')
 <div class="container-fluid py-4">
     <div class="col-xl-5 mx-auto mt-5">
+        <!-- バリエーションメッセージ -->
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <h2 class="my-5 text-center text-nowrap">予定を編集</h2>
         <form method='POST' action="/memos/{{ $memo->id }}">
             @csrf

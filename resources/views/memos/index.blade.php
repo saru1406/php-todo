@@ -4,6 +4,16 @@
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-xl-3 offset-xl-1 mt-5">
+            <!-- バリエーションメッセージ -->
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <h2>User info</h2>
             <table class="table mt-3">
                 <tr>

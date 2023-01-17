@@ -21,6 +21,15 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = \Auth::user();
+
+        // バリエーション
+        $request->validate([
+            'name' => 'required'
+        ],
+         [
+                'name.required' => 'nameは必須です。'
+         ]);
+
         $user->name = $request->input('name');
         $user->save();
         
