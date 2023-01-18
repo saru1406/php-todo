@@ -77,6 +77,12 @@
         </nav>
 
         <main>
+            <!-- フラッシュメッセージ -->
+            @if (session('flash_message'))
+                <div class="flash_message offset-xl-1 text-success">
+                    {{ session('flash_message') }}
+                </div>
+            @endif
             @yield('content')
             <div class="m-5"></div>
         </main>

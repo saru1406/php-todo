@@ -7,6 +7,7 @@ use App\Models\Memo;
 
 class MemoController extends Controller
 {
+    // ログイン制限
     public function __construct()
     {
         $this->middleware('auth');
@@ -27,7 +28,6 @@ class MemoController extends Controller
         // 自分の投稿した予定のみ表示
         $memos = $query->where('user_id', $user->id)->paginate(10);
         
-
         return view('memos.index', compact('user','memos','keyword'));
     }
 
@@ -47,16 +47,10 @@ class MemoController extends Controller
         $request->validate([
             'title' => 'required',
             'body' => 'required',
-        ],
-         [
-                'title.required' => 'タイトルは必須です。',
-                'body.required'  => 'bodyは必須項目です。',
-         ]);
+        ]);
         $memo->save();
 
-        
-
-        return redirect()->route('memos.index');
+        return redirect()->route('memos.index')->with('flash_message', '投稿が完了しました');
     }
 
     public function show($id)
@@ -80,7 +74,7 @@ class MemoController extends Controller
     public function update(Request $request, $id)
     {
         $user = \Auth::user();
-        $memo = Memo::find($id);
+        $memo = Memo::where('user_id', $user->id)->find($id);
 
         $memo->title = $request->input('title');
         $memo->body = $request->input('body');
@@ -88,15 +82,11 @@ class MemoController extends Controller
         $request->validate([
             'title' => 'required',
             'body' => 'required'
-        ],
-         [
-                'title.required' => 'タイトルは必須です。',
-                'body.required'  => 'bodyは必須項目です。'
-         ]);
+        ]);
         $memo->save();
 
         return view('memos.show', compact('user','memo'));
-        return redirect()->route('memos.show');
+        return redirect()->route('memos.show')->with('flash_message', '変更されました');
     }
 
     public function destroy($id)
@@ -105,6 +95,6 @@ class MemoController extends Controller
         // 自分の投稿した予定のみに制限
         $memo = Memo::where('user_id', $user->id)->find($id)->delete();
 
-        return redirect()->route('memos.index');
+        return redirect()->route('memos.index')->with('flash_message', '投稿が削除されました');
     }
 }
