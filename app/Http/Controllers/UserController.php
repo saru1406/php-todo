@@ -33,4 +33,11 @@ class UserController extends Controller
         
         return redirect()->route('memos.index')->with('flash_message', '変更されました');
     }
+
+    public function destroy(Request $request)
+    {
+        $user = \Auth::user()->delete();
+
+        return redirect('/')->with('flash_message', '退会されました');
+    }
 }

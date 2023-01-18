@@ -25,6 +25,13 @@
                     </tr>
                 </table>
         </form>
+        <div class="mt-5 text-center">
+            <form method='POST' action="{{route('user.destroy')}}">
+            @csrf
+            @method('DELETE')
+                <button type="submit" class="btn btn-danger w-25 text-nowrap" onclick="return confirm('本当に退会しますか？')">退会</button>
+            </form>
+        </div>
     </div>
 </div>
 @endsection
