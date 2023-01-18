@@ -22,15 +22,15 @@ class UserController extends Controller
     {
         $user = \Auth::user();
 
+        $user->name = $request->input('name');
         // バリエーション
         $request->validate([
-            'name' => 'required'
+            'name' => 'required|string|max:20'
         ],
          [
-                'name.required' => 'nameは必須です。'
+                'name.required' => 'nameは必須です。',
+                'name.max' => '20文字以内で入力してください。'
          ]);
-
-        $user->name = $request->input('name');
         $user->save();
         
         return redirect()->route('memos.index');

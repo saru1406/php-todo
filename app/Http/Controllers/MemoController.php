@@ -39,7 +39,10 @@ class MemoController extends Controller
     public function store(Request $request)
     {
         $memo=new Memo;
-        
+
+        $memo->title = $request->input('title');
+        $memo->body = $request->input('body');
+        $memo->user_id = $request->input('user_id');
         // バリエーション
         $request->validate([
             'title' => 'required',
@@ -49,10 +52,6 @@ class MemoController extends Controller
                 'title.required' => 'タイトルは必須です。',
                 'body.required'  => 'bodyは必須項目です。',
          ]);
-
-        $memo->title = $request->input('title');
-        $memo->body = $request->input('body');
-        $memo->user_id = $request->input('user_id');
         $memo->save();
 
         
@@ -83,19 +82,17 @@ class MemoController extends Controller
         $user = \Auth::user();
         $memo = Memo::find($id);
 
+        $memo->title = $request->input('title');
+        $memo->body = $request->input('body');
         // バリエーション
         $request->validate([
             'title' => 'required',
-            'body' => 'required',
+            'body' => 'required'
         ],
          [
                 'title.required' => 'タイトルは必須です。',
-                'body.required'  => 'bodyは必須項目です。',
+                'body.required'  => 'bodyは必須項目です。'
          ]);
-
-
-        $memo->title = $request->input('title');
-        $memo->body = $request->input('body');
         $memo->save();
 
         return view('memos.show', compact('user','memo'));

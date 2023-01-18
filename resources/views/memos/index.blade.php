@@ -29,9 +29,11 @@
                 @csrf
                 <input type='hidden' name='user_id' value="{{ $user['id'] }}">
                 <h4>タイトル</h4>
-                    <textarea name='title' class="form-control bg-white my-3" rows="1"></textarea>
+                    <!-- バリエーションエラー時の入力値保持{{ old('title') }} -->
+                    <textarea name='title' class="form-control bg-white my-3" rows="1">{{ old('title') }}</textarea>
                 <h4>内容</h4>
-                    <textarea name='body' class="form-control bg-white my-3" rows="5"></textarea>
+                    <!-- バリエーションエラー時の入力値保持{{ old('body') }} -->
+                    <textarea name='body' class="form-control bg-white my-3" rows="5">{{ old('body') }}</textarea>
                 <button type="submit" class="btn btn-success mb-3">追加する</button>
             </form>
         </div>
