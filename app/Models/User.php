@@ -41,4 +41,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // Memoモデル　リレーション
+    public function memos()
+    {
+        return $this->hasMany('App\Models\Memo');
+    }
+
+    // userが削除されると紐づいているメモも削除
+    public static function boot()
+    {
+    parent::boot();
+        static::deleted(function ($user) {
+            $user->memos()->delete();
+        });
+    }
 }

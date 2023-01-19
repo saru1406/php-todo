@@ -25,7 +25,7 @@ class MemoController extends Controller
             $query->where('title', 'LIKE', "%{$keyword}%")
                 ->orWhere('body', 'LIKE', "%{$keyword}%");
         }
-        // 自分の投稿した予定のみ表示
+        // 自分の投稿した予定のみ表示かつ10件表示
         $memos = $query->where('user_id', $user->id)->paginate(10);
         
         return view('memos.index', compact('user','memos','keyword'));
@@ -46,7 +46,7 @@ class MemoController extends Controller
         // バリエーション
         $request->validate([
             'title' => 'required',
-            'body' => 'required',
+            'body' => 'required'
         ]);
         $memo->save();
 
