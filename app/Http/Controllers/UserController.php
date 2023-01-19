@@ -25,7 +25,7 @@ class UserController extends Controller
         $user = \Auth::user();
 
         $user->name = $request->input('name');
-        // バリエーション
+        // バリデーション
         $request->validate([
             'name' => 'required|string|max:20'
         ]);

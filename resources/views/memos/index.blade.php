@@ -4,7 +4,7 @@
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-xl-3 offset-xl-1 mt-5">
-            <!-- バリエーションメッセージ -->
+            <!-- バリデーションメッセージ -->
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -27,13 +27,12 @@
             <h2 class="my-5 text-center text-nowrap">予定を入力してください</h2>
             <form method='POST' action="memos">
                 @csrf
-                <input type='hidden' name='user_id' value="{{ $user['id'] }}">
                 <h4>タイトル</h4>
-                    <!-- バリエーションエラー時の入力値保持{{ old('title') }} -->
-                    <textarea name='title' class="form-control bg-white my-3" rows="1">{{ old('title') }}</textarea>
+                <!-- バリエーションエラー時の入力値保持{{ old('title') }} -->
+                <textarea name='title' class="form-control bg-white my-3" rows="1">{{ old('title') }}</textarea>
                 <h4>内容</h4>
-                    <!-- バリエーションエラー時の入力値保持{{ old('body') }} -->
-                    <textarea name='body' class="form-control bg-white my-3" rows="5">{{ old('body') }}</textarea>
+                <!-- バリエーションエラー時の入力値保持{{ old('body') }} -->
+                <textarea name='body' class="form-control bg-white my-3" rows="5">{{ old('body') }}</textarea>
                 <button type="submit" class="btn btn-success mb-3">追加する</button>
             </form>
         </div>

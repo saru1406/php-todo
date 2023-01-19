@@ -4,6 +4,16 @@
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-xl-3 d-none d-xl-block offset-xl-1 mt-5">
+            <!-- バリデーションメッセージ -->
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <h2>User info</h2>
             <table class="table mt-3">
                 <tr>
@@ -17,13 +27,11 @@
             <h2 class="my-5 text-center text-nowrap">予定を入力してください</h2>
             <form method='POST' action="{{ route('memos.store')}}">
                 @csrf
-                <input type='hidden' name='user_id' value="{{ $user['id'] }}">
-                    <h4>タイトル</h4>
-                        <textarea name='title' class="form-control bg-white my-3" rows="1"></textarea>
-                    <h4>内容</h4>
-                        <textarea name='body' class="form-control bg-white my-3" rows="5"></textarea>
-                    <button type="submit" class="btn btn-success">追加する</button>
-                </input>
+                <h4>タイトル</h4>
+                <textarea name='title' class="form-control bg-white my-3" rows="1">{{old('title')}}</textarea>
+                <h4>内容</h4>
+                <textarea name='body' class="form-control bg-white my-3" rows="5">{{old('body')}}</textarea>
+                <button type="submit" class="btn btn-success">追加する</button>
             </form>
         </div>
         <div class="col-xl-5 offset-xl-1 mt-5">

@@ -83,6 +83,11 @@
                     {{ session('flash_message') }}
                 </div>
             @endif
+            @if (session('flash_alert'))
+                <div class="flash_message offset-xl-1 text-danger">
+                    {{ session('flash_alert') }}
+                </div>
+            @endif
             @yield('content')
             <div class="m-5"></div>
         </main>
