@@ -20,7 +20,6 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('memos',MemoController::class, ['only' => ['index','show','edit','store','update','destroy']]);
 Route::get('/mypage', [App\Http\Controllers\UserController::class, 'edit'])->name('user.edit');
 Route::patch('/mypage', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
