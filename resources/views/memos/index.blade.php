@@ -65,7 +65,7 @@
                 </tr>
                     @foreach ($memos as $memo)
                         <tr>
-                            <td><a href="memos/{{ $memo['id'] }}" style="text-decoration:none;" class="text-nowrap">{{ $memo->title }}</a></td>
+                            <td><a href="{{route('memos.show',($memo->id))}}" style="text-decoration:none;" class="text-nowrap">{{ $memo->title }}</a></td>
                             <td>
                                 <!-- 内容が50文字以上であれば【続きを表示】 -->
                                 @if(mb_strlen($memo->body) > 50)

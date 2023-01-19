@@ -14,14 +14,13 @@
             </div>
         @endif
         <h2 class="my-5 text-center text-nowrap">予定を編集</h2>
-        <form method='POST' action="/memos/{{ $memo->id }}">
+        <form method='POST' action="{{route('memos.update',($memo->id))}}">
             @csrf
             @method('PATCH')
-                <input type='hidden' name='user_id' value="{{ $user['id'] }}">
                     <h4>タイトル</h4>
-                        <textarea name='title' class="form-control bg-white my-3" rows="1" placeholder="30文字以内で入力してください">{{ $memo['title']}}</textarea>
+                    <textarea name='title' class="form-control bg-white my-3" rows="1" placeholder="30文字以内で入力してください">{{ $memo['title']}}</textarea>
                     <h4>内容</h4>
-                        <textarea name='body' class="form-control bg-white my-3" rows="5" placeholder="内容を入力してください">{{ $memo['body']}}</textarea>
+                    <textarea name='body' class="form-control bg-white my-3" rows="5" placeholder="内容を入力してください">{{ $memo['body']}}</textarea>
                     <button type="submit" class="btn btn-success">変更する</button>
                 </input>
         </form>
