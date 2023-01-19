@@ -20,7 +20,7 @@
             <table class="table table-borderless">
                 <tr>
                     <td><h4>name</h4></td>
-                    <td><textarea name='name' class="form-control bg-white" rows="1">{{ $user['name']}}</textarea></td>
+                    <td><textarea name='name' class="form-control bg-white" rows="1" placeholder="20文字以内で入力してください">{{ $user['name']}}</textarea></td>
                     <td><button type="submit" class="btn btn-success">変更する</button></td>
                 </tr>
             </table>

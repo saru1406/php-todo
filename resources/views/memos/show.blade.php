@@ -28,18 +28,18 @@
             <form method='POST' action="{{ route('memos.store')}}">
                 @csrf
                 <h4>タイトル</h4>
-                <textarea name='title' class="form-control bg-white my-3" rows="1">{{old('title')}}</textarea>
+                <textarea name='title' class="form-control bg-white my-3" rows="1" placeholder="30文字以内で入力してください">{{old('title')}}</textarea>
                 <h4>内容</h4>
-                <textarea name='body' class="form-control bg-white my-3" rows="5">{{old('body')}}</textarea>
+                <textarea name='body' class="form-control bg-white my-3" rows="5" placeholder="内容を入力してください">{{old('body')}}</textarea>
                 <button type="submit" class="btn btn-success">追加する</button>
             </form>
         </div>
         <div class="col-xl-5 offset-xl-1 mt-5">
             <h2 class="text-center">予定詳細</h2>
-            <!-- <div class="card border-warning mb-4 text-center shadow" style="max-width: 100%;">
-                <div class="card-header">タイトル:{{ $memo->title }}</div>
+            <div class="card border-warning mb-4 text-center shadow" style="max-width: 100%;">
+                <div class="card-header">{{ $memo->title }}</div>
                 <div class="card-body">
-                    <p class="card-text">{{ $memo->body }}</p>
+                    <p class="card-text">{!! nl2br(e($memo->body)) !!}</p>
                 </div>
             </div>
             <div class="row text-center">
@@ -50,28 +50,10 @@
                     <form method='POST' action="/memos/{{ $memo->id }}">
                         @csrf
                         @method('DELETE')
-                            <button type="submit" class="btn btn-danger text-nowrap">削除</button>
+                        <button type="submit" class="btn btn-danger text-nowrap">削除</button>
                     </form>
-                </div> -->
-            <table class="table table-hover table-inverse">
-                <tr>
-                    <th>タイトル</th>
-                    <th>内容</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                    <tr>
-                        <td class="text-nowrap">{{ $memo->title }}</td>
-                        <td>{{ $memo->body }}</td>
-                        <td><a href="{{ $memo['id'] }}/edit", class="btn btn-primary text-nowrap">編集</a></td>
-                        <td><form method='POST' action="/memos/{{ $memo->id }}">
-                            @csrf
-                            @method('DELETE')
-                                <button type="submit" class="btn btn-danger text-nowrap">削除</button>
-                            </form>
-                        </td>
-                    </tr>
-            </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -31,11 +31,6 @@ class MemoController extends Controller
         return view('memos.index', compact('user','memos','keyword'));
     }
 
-    public function create()
-    {
-        return view('memos.create');
-    }
-
     public function store(Request $request)
     {
         $user = \Auth::user();
@@ -46,7 +41,7 @@ class MemoController extends Controller
         $memo->user_id = $user->id;
         // バリデーション
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|string|max:30',
             'body' => 'required'
         ]);
         $memo->save();
@@ -93,7 +88,7 @@ class MemoController extends Controller
             $memo->body = $request->input('body');
             // バリデーション
             $request->validate([
-                'title' => 'required',
+                'title' => 'required|string|max:30',
                 'body' => 'required'
             ]);
             $memo->save();
@@ -101,10 +96,7 @@ class MemoController extends Controller
         }
         else{
             return redirect()->route('memos.index')->with('flash_alert', '他のユーザーの予定は変更できません');
-        }
-
-
-        
+        }        
     }
 
     public function destroy($id)

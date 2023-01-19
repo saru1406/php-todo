@@ -29,10 +29,10 @@
                 @csrf
                 <h4>タイトル</h4>
                 <!-- バリエーションエラー時の入力値保持{{ old('title') }} -->
-                <textarea name='title' class="form-control bg-white my-3" rows="1">{{ old('title') }}</textarea>
+                <textarea name='title' class="form-control bg-white my-3" rows="1" placeholder="30文字以内で入力してください">{{ old('title') }}</textarea>
                 <h4>内容</h4>
                 <!-- バリエーションエラー時の入力値保持{{ old('body') }} -->
-                <textarea name='body' class="form-control bg-white my-3" rows="5">{{ old('body') }}</textarea>
+                <textarea name='body' class="form-control bg-white my-3" rows="5" placeholder="内容を入力してください">{{ old('body') }}</textarea>
                 <button type="submit" class="btn btn-success mb-3">追加する</button>
             </form>
         </div>
@@ -40,7 +40,7 @@
             <form action="{{ route('memos.index') }}" method="GET">
                 <div class="row">
                     <div class="col-xl-8">
-                        <input type="text" class="form-control mx-auto bg-white" name="keyword" value="{{ $keyword }}">
+                        <input type="text" class="form-control mx-auto bg-white" name="keyword" value="{{ $keyword }}" placeholder="キーワードを入力してください">
                     </div>
                     <div class="col-xl-4 d-flex align-items-center">
                         <input type="submit" value="検索">
@@ -66,7 +66,14 @@
                     @foreach ($memos as $memo)
                         <tr>
                             <td><a href="memos/{{ $memo['id'] }}" style="text-decoration:none;" class="text-nowrap">{{ $memo->title }}</a></td>
-                            <td>{{ $memo->body }}</td>
+                            <td>
+                                <!-- 内容が50文字以上であれば【続きを表示】 -->
+                                @if(mb_strlen($memo->body) > 50)
+                                    {!! nl2br(e(Str::limit($memo->body, 50))) !!}<a href="{{route('memos.show',($memo->id))}}" style="text-decoration:none;">【続きを表示】</a>
+                                @else
+                                    {!! nl2br(e($memo->body)) !!}
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
             </table>
