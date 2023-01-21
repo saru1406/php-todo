@@ -26,7 +26,7 @@ class MemoController extends Controller
                 ->orWhere('body', 'LIKE', "%{$keyword}%");
         }
         // 自分の投稿した予定のみ表示かつ10件表示
-        $memos = $query->paginate(10);
+        $memos = $query->where('user_id', $user->id)->paginate(10);
         
         return view('memos.index', compact('user','memos','keyword'));
     }
@@ -55,7 +55,7 @@ class MemoController extends Controller
         $memo = Memo::find($id);
 
         // 自分の投稿した予定のみに制限
-        if($memo->user_id == $user->id){
+        if($memo->user_id === $user->id){
             return view('memos.show', compact('user', 'memo'));
         }
         else{
@@ -63,7 +63,7 @@ class MemoController extends Controller
         }
     }
 
-    public function edit($id)
+    public function edit(int $id)
     {
         $user = \Auth::user();
         $memo = Memo::find($id);
@@ -105,7 +105,7 @@ class MemoController extends Controller
         $memo = Memo::find($id);
 
         // 自分の投稿した予定のみに削除可能(デベロッパーツールで書き換え対応)
-        if ($memo->user_id == $user->id){
+        if ($memo->user_id === $user->id){
             $memo->delete();
             return redirect()->route('memos.index')->with('flash_message', '投稿が削除されました');
         }
