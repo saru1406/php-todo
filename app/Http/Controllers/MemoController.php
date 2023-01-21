@@ -26,7 +26,7 @@ class MemoController extends Controller
                 ->orWhere('body', 'LIKE', "%{$keyword}%");
         }
         // 自分の投稿した予定のみ表示かつ10件表示
-        $memos = $query->where('user_id', $user->id)->paginate(10);
+        $memos = $query->paginate(10);
         
         return view('memos.index', compact('user','memos','keyword'));
     }
@@ -49,7 +49,7 @@ class MemoController extends Controller
         return redirect()->route('memos.index')->with('flash_message', '投稿が完了しました');
     }
 
-    public function show($id)
+    public function show(int $id)
     {
         $user = \Auth::user();
         $memo = Memo::find($id);
@@ -69,7 +69,7 @@ class MemoController extends Controller
         $memo = Memo::find($id);
 
         // 自分の投稿した予定のみに制限
-        if($memo->user_id == $user->id){
+        if($memo->user_id === $user->id){
             return view('memos.edit', compact('user', 'memo'));
         }
         else{
@@ -77,13 +77,13 @@ class MemoController extends Controller
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request,int $id)
     {
         $user = \Auth::user();
         $memo = Memo::find($id);
 
         // 自分の投稿した予定のみに変更可能(デベロッパーツールで書き換え対応)
-        if($memo->user_id == $user->id){
+        if ($memo->user_id === $user->id){
             $memo->title = $request->input('title');
             $memo->body = $request->input('body');
             // バリデーション
@@ -94,22 +94,22 @@ class MemoController extends Controller
             $memo->save();
             return redirect()->route('memos.show', $id)->with('flash_message', '変更されました');
         }
-        else{
+        else {
             return redirect()->route('memos.index')->with('flash_alert', '他のユーザーの予定は変更できません');
         }        
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $user = \Auth::user();
         $memo = Memo::find($id);
 
         // 自分の投稿した予定のみに削除可能(デベロッパーツールで書き換え対応)
-        if($memo->user_id == $user->id){
+        if ($memo->user_id == $user->id){
             $memo->delete();
             return redirect()->route('memos.index')->with('flash_message', '投稿が削除されました');
         }
-        else{
+        else {
             return redirect()->route('memos.index')->with('flash_alert', '他のユーザーの予定は削除できません');
         }
     }
