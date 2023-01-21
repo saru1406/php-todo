@@ -43,10 +43,10 @@
                 </div>
             </div>
             <div class="row text-center">
-                <div class="col-xl-6">
+                <div class="col-xl-6 col-6">
                     <a href="{{ route('memos.edit',($memo->id)) }}", class="btn btn-primary text-nowrap">編集</a>
                 </div>
-                <div class="col-xl-6">
+                <div class="col-xl-6 col-6">
                     <form method='POST' action="{{ route('memos.destroy',($memo->id)) }}">
                         @csrf
                         @method('DELETE')
