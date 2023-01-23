@@ -7,5 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
-    use HasFactory;
+    //userモデル　リレーション
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }
 }

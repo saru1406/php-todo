@@ -48,16 +48,6 @@
                 </div>
             </form>
             <h2 class="text-center mt-5">予定一覧</h2>
-            <!-- @foreach ($memos as $memo)
-            <a href="memos/{{ $memo['id'] }}" style="text-decoration:none;" class="text-dark">
-                <div class="card border-warning mb-4 text-center shadow" style="max-width: 100%;">
-                    <div class="card-header">タイトル:{{ $memo->title }}</div>
-                    <div class="card-body">
-                        <p class="card-text">{{ $memo->body }}</p>
-                    </div>
-                </div>
-            </a>
-            @endforeach -->
             <table class="table table-hover table-inverse">
                 <tr>
                     <th>タイトル</th>

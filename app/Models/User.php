@@ -48,6 +48,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Memo');
     }
 
+    // Tagモデル　リレーション
+    public function tags()
+    {
+        return $this->hasMany('App\Models\Tag');
+    }
+
     // userが削除されると紐づいているメモも削除
     public static function boot()
     {
