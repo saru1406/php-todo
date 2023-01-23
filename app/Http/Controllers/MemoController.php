@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Memo;
+use App\Models\Tag;
 
 class MemoController extends Controller
 {
@@ -34,17 +35,26 @@ class MemoController extends Controller
     public function store(Request $request)
     {
         $user = \Auth::user();
-        $memo = new Memo;
 
+        $tag = new Tag;
+        $tag->name = $request->input('name');
+        $tag->user_id = $user->id;
+        $tag->save();
+
+        $memo = new Memo;
         $memo->title = $request->input('title');
         $memo->body = $request->input('body');
         $memo->user_id = $user->id;
+        $memo->tag_id = $tag->id;
         // バリデーション
         $request->validate([
             'title' => 'required|string|max:30',
             'body' => 'required'
         ]);
         $memo->save();
+
+        
+
 
         return redirect()->route('memos.index')->with('flash_message', '投稿が完了しました');
     }

@@ -33,6 +33,8 @@
                 <h4>内容</h4>
                 <!-- バリエーションエラー時の入力値保持{{ old('body') }} -->
                 <textarea name='body' class="form-control bg-white my-3" rows="5" placeholder="内容を入力してください">{{ old('body') }}</textarea>
+                <h4>タグ</h4>
+                <textarea name='name' class="form-control bg-white my-3" rows="1" placeholder="タグを追加してください">{{ old('name') }}</textarea>
                 <button type="submit" class="btn btn-success mb-3">追加する</button>
             </form>
         </div>
