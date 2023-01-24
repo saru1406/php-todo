@@ -56,7 +56,12 @@
                                 </li>
 
                                 <li class="nav-item">
+                                    <a class="btn btn-outline-light mx-3 ms-1" href="{{ route('tags.index') }}">タグ追加</a>
+                                </li>
+
+                                <li class="nav-item">
                                     <a class="btn btn-outline-light mx-3 ms-1" href="{{ route('memos.index') }}">予定一覧</a>
+                                </li>
 
                                 <li class="nav-item">
                                     <a class="btn btn-outline-light ms-1" href="{{ route('logout') }}"
