@@ -18,6 +18,25 @@
             <textarea name='name' class="form-control bg-white my-3" rows="1" placeholder="10文字以内で入力してください">{{ old('name') }}</textarea>
             <button type="submit" class="btn btn-success mb-3">追加する</button>
         </form>
+        <table class="table table-hover table-inverse">
+            <tr>
+                <th>タグ名</th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach ($tags as $tag)
+            <tr>
+                <td>{{$tag->name}}</td>
+                <td><a href="{{route('tags.edit',($tag->id))}}", class="btn btn-primary">編集</a></td>
+                <form method='POST' action="{{ route('tags.destroy',($tag->id)) }}">
+                    @csrf
+                    @method('DELETE')
+                    <td><button type="submit" class="btn btn-danger text-nowrap">削除</button></td>
+                </form>
+                
+            </tr>
+            @endforeach
+        </table>
     </div>
 </div>
 @endsection

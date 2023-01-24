@@ -10,13 +10,17 @@ class TagController extends Controller
     public function index()
     {
         $user = \Auth::user();
-        $tag = $user->tags;
+        $tags = $user->tags;
 
-        return view('tags.index', compact('user','tag'));
+        return view('tags.index', compact('user','tags'));
     }
 
     public function edit(int $id)
     {
+        $user = \Auth::user();
+        $tag = Tag::find($id);
+
+        return view('tags.edit', compact('user','tag'));
     }
 
     public function store(Request $request)
@@ -37,9 +41,30 @@ class TagController extends Controller
 
     public function update(Request $request,int $id)
     {
+        $user = \Auth::user();
+        $tag = Tag::find($id);
+
+        if ($tag->user_id === $user->id){
+            $tag->name = $request->input('name');
+            $tag->save();
+            return redirect()->route('tags.index')->with('flash_message', '変更が完了しました');
+        }
+        else{
+            return redirect()->route('tags.index')->with('flash_message', '他のユーザーのタグは変更できません');
+        }
     }
 
     public function destroy(int $id)
     {
+        $tag = Tag::find($id);
+        $user = \Auth::user();
+
+        if ($tag->user_id === $user->id){
+            $tag->delete();
+            return redirect()->route('tags.index')->with('flash_message', '削除されました');
+        }
+        else{
+            return redirect()->route('tags.index')->with('flash_alert', '他のユーザーのタグは削除できません');
+        }
     }
 }
