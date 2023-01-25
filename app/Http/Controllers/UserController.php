@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AuthRequest;
 use Auth;
 
 class UserController extends Controller
@@ -20,21 +21,17 @@ class UserController extends Controller
         return view('users.edit', compact('user'));
     }
 
-    public function update(Request $request)
+    public function update(AuthRequest $request)
     {
         $user = \Auth::user();
 
         $user->name = $request->input('name');
-        // バリデーション
-        $request->validate([
-            'name' => 'required|string|max:20'
-        ]);
         $user->save();
         
         return redirect()->route('memos.index')->with('flash_message', '変更されました');
     }
 
-    public function destroy(Request $request)
+    public function destroy()
     {
         $user = \Auth::user()->delete();
 

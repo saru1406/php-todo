@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\MemoRequest;
 use App\Models\Memo;
 use App\Models\Tag;
 
@@ -17,6 +18,8 @@ class MemoController extends Controller
     public function index(Request $request)
     {
         $user = \Auth::user();
+        $tags = $user->tags;
+        
 
         // 検索機能
         $keyword = $request->input('keyword');
@@ -29,10 +32,10 @@ class MemoController extends Controller
         // ページネーション10件表示
         $memos = $query->paginate(10);
         
-        return view('memos.index', compact('user','memos','keyword'));
+        return view('memos.index', compact('user','memos','keyword','tags'));
     }
 
-    public function store(Request $request)
+    public function store(MemoRequest $request)
     {
         $user = \Auth::user();
 
@@ -40,12 +43,8 @@ class MemoController extends Controller
         $memo->title = $request->input('title');
         $memo->body = $request->input('body');
         $memo->user_id = $user->id;
-        $memo->tag_id = $tag->id;
-        // バリデーション
-        $request->validate([
-            'title' => 'required|string|max:30',
-            'body' => 'required'
-        ]);
+        $memo->tag_id = $request->input('tag_id');
+        
         $memo->save();
 
         return redirect()->route('memos.index')->with('flash_message', '投稿が完了しました');
@@ -79,7 +78,7 @@ class MemoController extends Controller
         }
     }
 
-    public function update(Request $request,int $id)
+    public function update(MemoRequest $request,int $id)
     {
         $user = \Auth::user();
         $memo = Memo::find($id);
@@ -88,11 +87,6 @@ class MemoController extends Controller
         if ($memo->user_id === $user->id){
             $memo->title = $request->input('title');
             $memo->body = $request->input('body');
-            // バリデーション
-            $request->validate([
-                'title' => 'required|string|max:30',
-                'body' => 'required'
-            ]);
             $memo->save();
             return redirect()->route('memos.show', $id)->with('flash_message', '変更されました');
         }

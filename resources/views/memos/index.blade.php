@@ -34,7 +34,11 @@
                 <!-- バリエーションエラー時の入力値保持{{ old('body') }} -->
                 <textarea name='body' class="form-control bg-white my-3" rows="5" placeholder="内容を入力してください">{{ old('body') }}</textarea>
                 <h4>タグ</h4>
-                <textarea name='name' class="form-control bg-white my-3" rows="1" placeholder="タグを追加してください">{{ old('name') }}</textarea>
+                <select class="form-select" name="tag_id">
+                    @foreach ($tags as $tag)
+                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                    @endforeach
+                </select>
                 <button type="submit" class="btn btn-success mb-3">追加する</button>
             </form>
         </div>
@@ -54,6 +58,7 @@
                 <tr>
                     <th>タイトル</th>
                     <th>内容</th>
+                    <th>タグ</th>
                 </tr>
                     @foreach ($memos as $memo)
                         <tr>
@@ -66,13 +71,11 @@
                                     {!! nl2br(e($memo->body)) !!}
                                 @endif
                             </td>
-                            @if (isset($memo->tag_id))
-                                @foreach ( $tags as $tag )
-                                <td>
-                                    {{ $tag->name }}
-                                </td> 
-                                @endforeach
-                            @endif
+                            <td>
+                                @if (isset($memo->tag_id))
+                                    {{ $memo->tag->name }}
+                                @endif
+                            </td> 
                         </tr>
                     @endforeach
             </table>
