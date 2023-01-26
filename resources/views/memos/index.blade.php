@@ -34,7 +34,7 @@
                 <!-- バリエーションエラー時の入力値保持{{ old('body') }} -->
                 <textarea name='body' class="form-control bg-white my-3" rows="5" placeholder="内容を入力してください">{{ old('body') }}</textarea>
                 <h4>タグ</h4>
-                <select class="form-select" name="tag_id">
+                <select class="form-select my-3" name="tag_id">
                     @foreach ($tags as $tag)
                         <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                     @endforeach
