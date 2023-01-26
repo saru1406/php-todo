@@ -19,4 +19,9 @@ class Memo extends Model
     {
         return $this->belongsTo('App\Models\Tag');
     }
+
+    public function bookmarks()
+    {
+        return $this->hasMany('App\Models\Bookmark');
+    }
 }

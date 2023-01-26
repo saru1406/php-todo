@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->hasMany('App\Models\Tag');
     }
 
+    public function bookmarks()
+    {
+        return $this->hasMany('App\Models\Bookmark');
+    }
+
     // userが削除されると紐づいているメモも削除
     public static function boot()
     {

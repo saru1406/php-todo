@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\MemoRequest;
 use App\Models\Memo;
 use App\Models\Tag;
+use App\Models\Bookmark;
 
 class MemoController extends Controller
 {
@@ -44,7 +45,6 @@ class MemoController extends Controller
         $memo->body = $request->input('body');
         $memo->user_id = $user->id;
         $memo->tag_id = $request->input('tag_id');
-        
         $memo->save();
 
         return redirect()->route('memos.index')->with('flash_message', '投稿が完了しました');
@@ -54,10 +54,11 @@ class MemoController extends Controller
     {
         $user = \Auth::user();
         $memo = Memo::find($id);
+        $bookmark=Bookmark::where('memo_id', $memo->id)->where('user_id', auth()->user()->id)->first();
 
         // 自分の投稿した予定のみに制限
         if($memo->user_id === $user->id){
-            return view('memos.show', compact('user', 'memo'));
+            return view('memos.show', compact('user', 'memo','bookmark'));
         }
         else{
             return redirect()->route('memos.index')->with('flash_alert', '他のユーザーの予定は開くことができません');
