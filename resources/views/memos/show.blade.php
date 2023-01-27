@@ -38,18 +38,18 @@
             <h2 class="text-center">予定詳細</h2>
             <div class="card border-warning mb-4 text-center shadow" style="max-width: 100%;">
                 <div class="card-header">
-                    @if($bookmark)
-                        <form action="{{route('bookmarks.destroy',($memo->id))}}" method="POST" class="mb-4" >
+                    @if ($bookmark)
+                        <form action="{{route('bookmarks.destroy',($memo->id))}}" method="POST">
                             <input type="hidden" name="memo_id" value="{{$memo->id}}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">ブックマーク解除</button>
+                            <button type="submit" class="btn"><i class="fas fa-map-pin" style="color: red;"></i></button>
                         </form>
                     @else
-                        <form action="{{route('bookmarks.store')}}" method="POST" class="mb-4" >
+                        <form action="{{route('bookmarks.store')}}" method="POST">
                             @csrf
                             <input type="hidden" name="memo_id" value="{{$memo->id}}">
-                            <button type="submit">ブックマーク</button>
+                            <button type="submit" class="btn"><i class="fas fa-map-pin"></i></button>
                         </form>
                     @endif
                     {{ $memo->title }}

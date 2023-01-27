@@ -54,7 +54,7 @@ class MemoController extends Controller
     {
         $user = \Auth::user();
         $memo = Memo::find($id);
-        $bookmark=Bookmark::where('memo_id', $memo->id)->where('user_id', auth()->user()->id)->first();
+        $bookmark = Bookmark::where('memo_id', $memo->id)->where('user_id', $user->id)->first();
 
         // 自分の投稿した予定のみに制限
         if($memo->user_id === $user->id){
