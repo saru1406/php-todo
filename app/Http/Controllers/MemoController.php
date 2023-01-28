@@ -29,7 +29,7 @@ class MemoController extends Controller
             $query->where('title', 'LIKE', "%{$keyword}%")
                 ->orWhere('body', 'LIKE', "%{$keyword}%")
                 ->orWhereHas('tag', function ($query) use ($keyword){
-                    $query->where('name', 'like', '%' . $keyword . '%');
+                    $query->where('name', 'LIKE', "%{$keyword}%");
                 });
         }
         // ページネーション10件表示
