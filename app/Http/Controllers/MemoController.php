@@ -21,8 +21,9 @@ class MemoController extends Controller
         $user = \Auth::user();
         $tags = $user->tags;
         
-        // 検索機能
+        // キーワード検索機能
         $keyword = $request->input('keyword');
+        // タグ検索
         $tag_keyword = $request->input('tag_keyword');
         // 自分の投稿した予定のみ検索表示
         $query = Memo::query()->where('user_id', $user->id);
@@ -30,6 +31,7 @@ class MemoController extends Controller
             $query->where('title', 'LIKE', "%{$keyword}%")
                 ->orWhere('body', 'LIKE', "%{$keyword}%");
         }
+        // タグ検索
         elseif(!empty($tag_keyword)) {
             $query->WhereHas('tag', function ($query) use ($tag_keyword){
                 $query->where('name', 'LIKE', "{$tag_keyword}");
