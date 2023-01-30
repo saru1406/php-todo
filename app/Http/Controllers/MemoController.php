@@ -23,19 +23,22 @@ class MemoController extends Controller
         
         // 検索機能
         $keyword = $request->input('keyword');
+        $tag_keyword = $request->input('tag_keyword');
         // 自分の投稿した予定のみ検索表示
         $query = Memo::query()->where('user_id', $user->id);
         if(!empty($keyword)) {
             $query->where('title', 'LIKE', "%{$keyword}%")
-                ->orWhere('body', 'LIKE', "%{$keyword}%")
-                ->orWhereHas('tag', function ($query) use ($keyword){
-                    $query->where('name', 'LIKE', "%{$keyword}%");
-                });
+                ->orWhere('body', 'LIKE', "%{$keyword}%");
+        }
+        elseif(!empty($tag_keyword)) {
+            $query->WhereHas('tag', function ($query) use ($tag_keyword){
+                $query->where('name', 'LIKE', "{$tag_keyword}");
+            });
         }
         // ページネーション10件表示
         $memos = $query->paginate(10);
         
-        return view('memos.index', compact('user','memos','keyword','tags'));
+        return view('memos.index', compact('user','memos','keyword','tags','tag_keyword'));
     }
 
     public function store(MemoRequest $request)

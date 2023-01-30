@@ -35,6 +35,7 @@
                 <textarea name='body' class="form-control bg-white my-3" rows="5" placeholder="内容を入力してください">{{ old('body') }}</textarea>
                 <h4>タグ</h4>
                 <select class="form-select bg-white my-3" name="tag_id">
+                <option value="">選択して下さい</option>
                     @foreach ($tags as $tag)
                         <option value="{{ $tag->id }}">{{ $tag->name }}</option>
                     @endforeach
@@ -45,10 +46,27 @@
         <div class="col-xl-5 offset-xl-1">
             <form action="{{ route('memos.index') }}" method="GET">
                 <div class="row">
-                    <div class="col-xl-8">
+                    <h4 class="col-xl-4 d-flex align-items-center m-0">キーワード検索:</h4>
+                    <div class="col-xl-6">
                         <input type="text" class="form-control mx-auto bg-white" name="keyword" value="{{ $keyword }}" placeholder="キーワードを入力してください">
                     </div>
-                    <div class="col-xl-4 d-flex align-items-center">
+                    <div class="col-xl-2 d-flex align-items-center">
+                        <input type="submit" value="検索">
+                    </div>
+                </div>
+            </form>
+            <form action="{{ route('memos.index') }}" method="GET">
+                <div class="row my-3">
+                    <h4 class="col-xl-7 d-flex align-items-center m-0">タグ検索:</h4>
+                    <div class="col-xl-3">
+                        <select class="form-select bg-white" name="tag_keyword">
+                            <option value="">選択して下さい</option>
+                            @foreach ($tags as $tag)
+                                <option value="{{ $tag->name }}" prepend="キーワードを入力してください">{{ $tag->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="col-xl-2 d-flex align-items-center">
                         <input type="submit" value="検索">
                     </div>
                 </div>
