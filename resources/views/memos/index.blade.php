@@ -37,7 +37,7 @@
                 <select class="form-select bg-white my-3" name="tag_id">
                 <option value="">選択して下さい</option>
                     @foreach ($tags as $tag)
-                        <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+                        <option value="{{ $tag->id }}">{{ ($tag->name) }}</option>
                     @endforeach
                 </select>
                 <button type="submit" class="btn btn-success mb-3">追加する</button>
@@ -60,9 +60,9 @@
                     <h4 class="col-xl-7 d-flex align-items-center m-0">タグ検索:</h4>
                     <div class="col-xl-3">
                         <select class="form-select bg-white" name="tag_keyword">
-                            <option value="">選択して下さい</option>
+                        <option value="">選択して下さい</option>
                             @foreach ($tags as $tag)
-                                <option value="{{ $tag->name }}" prepend="キーワードを入力してください">{{ $tag->name }}</option>
+                                <option value="{{ ($tag->name) }}">{{ ($tag->name) }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -72,6 +72,7 @@
                 </div>
             </form>
             <h2 class="text-center mt-5">予定一覧</h2>
+            <p>並び替え|@sortablelink('created_at', '作成日')|@sortablelink('updated_at', '更新日')<p>
             <table class="table table-hover table-inverse">
                 <tr>
                     <th>タイトル</th>

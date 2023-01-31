@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+// sorttable
+use Kyslik\ColumnSortable\Sortable;
 
 class Memo extends Model
 {
@@ -24,4 +26,7 @@ class Memo extends Model
     {
         return $this->hasMany('App\Models\Bookmark');
     }
+
+    use Sortable;
+    public $sortable = ['created_at', 'updated_at'];
 }

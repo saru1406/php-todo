@@ -34,12 +34,20 @@ class MemoController extends Controller
         // タグ検索
         elseif(!empty($tag_keyword)) {
             $query->WhereHas('tag', function ($query) use ($tag_keyword){
-                $query->where('name', 'LIKE', "{$tag_keyword}");
+                $query->where('name', 'LIKE', "%{$tag_keyword}%");
             });
         }
         // ページネーション10件表示
-        $memos = $query->paginate(10);
+        $memos = $query->sortable()->paginate(10);
+
+        $sort = $request->get('sort');
+        if ($sort) {
+            if ($sort === '1') {
+                $articles = Article::orderBy('created_at')->get();
+            }
+        } else {
         
+    }
         return view('memos.index', compact('user','memos','keyword','tags','tag_keyword'));
     }
 
@@ -61,11 +69,12 @@ class MemoController extends Controller
     {
         $user = \Auth::user();
         $memo = Memo::find($id);
+        $tags = $user->tags;
         $bookmark = Bookmark::where('memo_id', $memo->id)->where('user_id', $user->id)->first();
 
         // 自分の投稿した予定のみに制限
         if($memo->user_id === $user->id){
-            return view('memos.show', compact('user', 'memo','bookmark'));
+            return view('memos.show', compact('user', 'memo','bookmark','tags'));
         }
         else{
             return redirect()->route('memos.index')->with('flash_alert', '他のユーザーの予定は開くことができません');
