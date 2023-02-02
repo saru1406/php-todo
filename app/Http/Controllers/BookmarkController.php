@@ -8,6 +8,14 @@ use App\Models\Memo;
 
 class BookmarkController extends Controller
 {
+    public function index()
+    {
+        $user = \Auth::user();
+        $bookmarks = $user->bookmarks()->paginate(10);
+
+        return view('bookmarks.index', compact('user', 'bookmarks'));
+    }
+
     public function store(Request $request)
     {
         $user = \Auth::user();

@@ -50,13 +50,13 @@
                             <input type="hidden" name="memo_id" value="{{$memo->id}}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn"><i class="fas fa-map-pin" style="color: red;"></i></button>
+                            <button type="submit" class="btn"><i class="fas fa-bookmark" style="color: red;"></i></button>
                         </form>
                     @else
                         <form action="{{route('bookmarks.store')}}" method="POST">
                             @csrf
                             <input type="hidden" name="memo_id" value="{{$memo->id}}">
-                            <button type="submit" class="btn"><i class="fas fa-map-pin"></i></button>
+                            <button type="submit" class="btn"><i class="fas fa-bookmark"></i></button>
                         </form>
                     @endif
                     {{ $memo->title }}

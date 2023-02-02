@@ -61,6 +61,11 @@
                                 </li>
 
                                 <li class="nav-item">
+                                    <a class="btn btn-outline-light mx-3 ms-1" href="{{ route('bookmarks.index') }}">お気に入り一覧</a>
+                                </li>
+
+
+                                <li class="nav-item">
                                     <a class="btn btn-outline-light mx-3 ms-1" href="{{ route('memos.index') }}">予定一覧</a>
                                 </li>
 

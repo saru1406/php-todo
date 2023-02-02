@@ -27,4 +27,4 @@ Route::get('/mypage', [App\Http\Controllers\UserController::class, 'edit'])->nam
 Route::patch('/mypage', [App\Http\Controllers\UserController::class, 'update'])->name('user.update');
 Route::delete('/mypage', [App\Http\Controllers\UserController::class, 'destroy'])->name('user.destroy');
 Route::resource('tags',TagController::class, ['only' => ['index','edit','store','update','destroy']]);
-Route::resource('bookmarks',BookmarkController::class, ['only' => ['store','destroy']]);
+Route::resource('bookmarks',BookmarkController::class, ['only' => ['index','store','destroy']]);
