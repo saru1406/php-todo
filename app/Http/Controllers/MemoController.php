@@ -40,14 +40,6 @@ class MemoController extends Controller
         // ページネーション10件表示
         $memos = $query->sortable()->paginate(10);
 
-        $sort = $request->get('sort');
-        if ($sort) {
-            if ($sort === '1') {
-                $articles = Article::orderBy('created_at')->get();
-            }
-        } else {
-        
-    }
         return view('memos.index', compact('user','memos','keyword','tags','tag_keyword'));
     }
 
